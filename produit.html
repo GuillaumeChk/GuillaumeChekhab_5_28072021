@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         
         <link rel="stylesheet" href="style.css">
-        
+
     </head>
 
     <body>
@@ -46,7 +46,45 @@
             <div class="container">
                 <h1>Produit</h1>
 
-                <p>Personnalisation :</p>
+                <div class="card bg-light my-3">
+                    <div class="row no-gutters">
+                        <div class="col-4">
+                            <img class="card-img-top" src="..." alt="Image du produit">
+                        </div>
+                        <div class="col-8">
+                            <div class="card-body">
+                            <h5 class="card-title">Nom du produit</h5>
+                            <p class="card-text">Description</p>
+                            <p class="card-text">Prix : 0€</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Options de personnalisation :</h4>
+                <form>
+                    <div class="form-group">
+                        <label for="choixCouleur">Couleur</label>
+                        <select class="form-control" id="choixCouleur">
+                          <option>Bleu</option>
+                          <option>Noir</option>
+                          <option>Gris</option>
+                          <option>Brun</option>
+                          <option>Blanc</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="choixTaille">Taille</label>
+                        <select class="form-control" id="choixTaille">
+                          <option>S</option>
+                          <option>M</option>
+                          <option>L</option>
+                        </select>
+                    </div>
+                </form>
+
+
+                <a href="./panier.html" class="btn btn-warning float-right mb-3">Ajouter au panier</a>
 
             </div>
         </main>
