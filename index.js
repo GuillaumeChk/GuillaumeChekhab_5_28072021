@@ -1,3 +1,5 @@
+const { getAllCameras } = require("./controllers/camera");
+
 const listeProduits = document.getElementById('liste-produits');
 
 function createCard() {
@@ -80,4 +82,25 @@ function createCard() {
     return card;
 }
 
+let id;
+let name;
+let price;
+let description;
+let imageUrl;
+
+fetch("http://localhost:3000/api/teddies")
+  .then(function(res) {
+    if (res.ok) {
+      return res.json();
+    }
+  })
+  .then(function(value) {
+    console.log(value);
+  })
+  .catch(function(err) {
+    // Une erreur est survenue
+  });
+
 listeProduits.appendChild(createCard());
+
+console.log(listeProduits);
