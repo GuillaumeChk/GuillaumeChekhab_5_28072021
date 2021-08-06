@@ -16,7 +16,7 @@
     </head>
 
     <body>
-        <header class="bg-warning">
+        <header class="bg-primary">
             <div class="container">
                 <div class="row">
                     <nav class="col navbar navbar-expand-md navbar-dark">
@@ -49,13 +49,13 @@
                 <div class="card bg-light my-3">
                     <div class="row no-gutters">
                         <div class="col-4">
-                            <img class="card-img-top" src="..." alt="Image du produit">
+                            <img id="img" class="card-img-top" src="..." alt="Image du produit">
                         </div>
                         <div class="col-8">
                             <div class="card-body">
-                            <h5 class="card-title">Nom du produit</h5>
-                            <p class="card-text">Description</p>
-                            <p class="card-text">Prix : 0€</p>
+                            <h5 id="name" class="card-title">Nom du produit</h5>
+                            <p id="desc" class="card-text">Description</p>
+                            <p id="price" class="card-text">Prix : 0€</p>
                             </div>
                         </div>
                     </div>
@@ -64,21 +64,8 @@
                 <h4>Options de personnalisation :</h4>
                 <form>
                     <div class="form-group">
-                        <label for="choixCouleur">Couleur</label>
-                        <select class="form-control" id="choixCouleur">
-                          <option>Bleu</option>
-                          <option>Noir</option>
-                          <option>Gris</option>
-                          <option>Brun</option>
-                          <option>Blanc</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="choixTaille">Taille</label>
-                        <select class="form-control" id="choixTaille">
-                          <option>S</option>
-                          <option>M</option>
-                          <option>L</option>
+                        <label id="choixLabel" for="choixSelect">Nom du label</label>
+                        <select class="form-control" id="choixSelect">
                         </select>
                     </div>
                 </form>
@@ -97,5 +84,6 @@
 
         <!-- Javascript -->
         <script src="./server.js"></script>
+        <script src="./produit.js"></script>
     </body>
 </html>

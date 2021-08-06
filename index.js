@@ -1,25 +1,7 @@
-const { getAllCameras } = require("./controllers/camera");
-
 const listeProduits = document.getElementById('liste-produits');
 
-function createCard() {
-    /*
-    <div class="card bg-light m-3">
-        <div class="row no-gutters">
-            <div class="col-4">
-                <img class="card-img-top" src="..." alt="Image du produit">
-            </div>
-            <div class="col-8">
-                <div class="card-body">
-                    <h5 class="card-title">Nom du produit</h5>
-                    <p class="card-text">Description</p>
-                    <p class="card-text">Prix : 0€</p>
-                    <a href="./produit.html" class="btn btn-warning float-right mb-3">Voir le produit</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    */
+// Créer une carte produit
+function createCard(objet) {
     const card = document.createElement("div");
     
     // <div class="card bg-light m-3">
@@ -37,8 +19,8 @@ function createCard() {
     // <img class="card-img-top" src="..." alt="Image du produit">
     const image = document.createElement("img");
     image.classList.add("card-img-top");
-    image.src = "...";
-    image.alt = "Image du produit";
+    image.src = objet.imageUrl;
+    image.alt = "Image du produit " + objet.name;
 
     // <div class="col-8">
     const div3 = document.createElement("div");
@@ -51,23 +33,23 @@ function createCard() {
     // <div class="card-title"></div>
     const title = document.createElement("h5");
     title.classList.add("card-title");
-    title.textContent = "Nom du produit";
+    title.textContent = objet.name;
 
     // <div class="card-text"></div>
     const text1 = document.createElement("p");
     text1.classList.add("card-text");
-    text1.textContent = "Description";
+    text1.textContent = objet.description;
 
     // <div class="card-text"></div>
     const text2 = document.createElement("p");
     text2.classList.add("card-text");
-    text2.textContent = "Prix : 0€";
+    text2.textContent = "Prix : " + objet.price + "€";
 
     // <a href="./produit.html" class="btn btn-warning float-right mb-3">Voir le produit</a>
     const link = document.createElement("a");
     link.classList.add("btn", "btn-warning", "float-right", "mb-3");
     link.textContent = "Voir le produit";
-    link.href = "./produit.html";
+    link.href = "./produit.html?id=" + objet._id;
 
     body.appendChild(title);
     body.appendChild(text1);
@@ -82,13 +64,29 @@ function createCard() {
     return card;
 }
 
-let id;
-let name;
-let price;
-let description;
-let imageUrl;
+// Cameras
+fetch("http://localhost:3000/api/cameras/")
+  .then(function(res) {
+    if (res.ok) {
+      return res.json();
+    }
+  })
+  .then(function(value) {
+    // Pour chaque produit, créer sa carte
+    for (const i in value) {
+      if (Object.hasOwnProperty.call(value, i)) {
+        listeProduits.appendChild(createCard(value[i]));
+      }
+    }
+  })
+  .catch(function(err) {
+    // Une erreur est survenue
+    console.log("Catch erreur dans le fetch");
+  });
 
-fetch("http://localhost:3000/api/teddies")
+  /*
+// Teddies
+fetch("http://localhost:3000/api/teddies/")
   .then(function(res) {
     if (res.ok) {
       return res.json();
@@ -96,11 +94,36 @@ fetch("http://localhost:3000/api/teddies")
   })
   .then(function(value) {
     console.log(value);
+    for (const key in value) {
+      if (Object.hasOwnProperty.call(value, key)) {
+        listeProduits.appendChild(createCard(value[key]));
+      }
+    }
   })
   .catch(function(err) {
     // Une erreur est survenue
+    console.log("Catch erreur dans le fetch");
   });
 
-listeProduits.appendChild(createCard());
+// Meubles
+fetch("http://localhost:3000/api/furniture/")
+  .then(function(res) {
+    if (res.ok) {
+      return res.json();
+    }
+  })
+  .then(function(value) {
+    console.log(value);
+    for (const key in value) {
+      if (Object.hasOwnProperty.call(value, key)) {
+        listeProduits.appendChild(createCard(value[key]));
+      }
+    }
+  })
+  .catch(function(err) {
+    // Une erreur est survenue
+    console.log("Catch erreur dans le fetch");
+  });
+*/
 
-console.log(listeProduits);
+//console.log(listeProduits);
