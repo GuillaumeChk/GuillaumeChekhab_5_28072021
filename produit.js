@@ -12,6 +12,7 @@ function setProductValues (objet) {
     document.getElementById("price").textContent = "Prix : " + objet.price + "€";
     document.getElementById("img").src = objet.imageUrl;
     document.getElementById("choixLabel").textContent = "Lentilles"; // pour Cameras only
+    
     // Ajouter les options du select
     for (const i in objet.lenses) {
         if (Object.hasOwnProperty.call(objet.lenses, i)) {
@@ -20,6 +21,9 @@ function setProductValues (objet) {
             document.getElementById("choixSelect").appendChild(selectLine);
         }
     }
+
+    // Ajouter lien au bouton "Ajouter au panier"
+    document.getElementById("goPanier").href = "./panier.html?id=" + objet._id;
 }
 
 // Récupérer les valeurs du produit
@@ -30,7 +34,7 @@ fetch(urlProduit)
     }
   })
   .then(function(value) {
-    //console.log(value);
+    console.log(value);
     setProductValues(value);
   })
   .catch(function(err) {
