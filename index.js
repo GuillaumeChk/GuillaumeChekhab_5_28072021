@@ -1,7 +1,7 @@
 const listeProduits = document.getElementById('liste-produits');
 
 // Créer une carte produit
-function createCard(objet) {
+function creerCarte(objet) {
     const card = document.createElement("div");
     
     // <div class="card bg-light m-3">
@@ -75,7 +75,7 @@ fetch("http://localhost:3000/api/cameras/")
     // Pour chaque produit, créer sa carte
     for (const i in value) {
       if (Object.hasOwnProperty.call(value, i)) {
-        listeProduits.appendChild(createCard(value[i]));
+        listeProduits.appendChild(creerCarte(value[i]));
       }
     }
   })
@@ -83,47 +83,5 @@ fetch("http://localhost:3000/api/cameras/")
     // Une erreur est survenue
     console.log("Catch erreur dans le fetch");
   });
-
-  /*
-// Teddies
-fetch("http://localhost:3000/api/teddies/")
-  .then(function(res) {
-    if (res.ok) {
-      return res.json();
-    }
-  })
-  .then(function(value) {
-    console.log(value);
-    for (const key in value) {
-      if (Object.hasOwnProperty.call(value, key)) {
-        listeProduits.appendChild(createCard(value[key]));
-      }
-    }
-  })
-  .catch(function(err) {
-    // Une erreur est survenue
-    console.log("Catch erreur dans le fetch");
-  });
-
-// Meubles
-fetch("http://localhost:3000/api/furniture/")
-  .then(function(res) {
-    if (res.ok) {
-      return res.json();
-    }
-  })
-  .then(function(value) {
-    console.log(value);
-    for (const key in value) {
-      if (Object.hasOwnProperty.call(value, key)) {
-        listeProduits.appendChild(createCard(value[key]));
-      }
-    }
-  })
-  .catch(function(err) {
-    // Une erreur est survenue
-    console.log("Catch erreur dans le fetch");
-  });
-*/
 
 //console.log(listeProduits);

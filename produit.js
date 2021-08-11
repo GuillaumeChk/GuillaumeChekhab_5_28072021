@@ -5,7 +5,7 @@ const param = Object.fromEntries(urlSearchParams.entries());
 const urlProduit = "http://localhost:3000/api/cameras/" + param.id;
 
 // Définir les valeurs du produit sur la page
-function setProductValues (objet) {
+function definirValeursProduit (objet) {
     document.getElementById("name").textContent = objet.name;
     document.getElementById("desc").textContent = objet.description;
     document.getElementById("name").textContent = objet.name;
@@ -23,8 +23,14 @@ function setProductValues (objet) {
     }
 
     // Ajouter lien au bouton "Ajouter au panier"
-    document.getElementById("goPanier").href = "./panier.html?id=" + objet._id;
+    // document.getElementById("goPanier").href = "./panier.html?id=" + objet._id;
+    document.getElementById("goPanier").href = "./panier.html";
 }
+
+// Panier localstorage
+panier = localStorage;
+// panier.clear();
+boutonAjouter = document.getElementById("goPanier");
 
 // Récupérer les valeurs du produit
 fetch(urlProduit)
@@ -34,8 +40,13 @@ fetch(urlProduit)
     }
   })
   .then(function(value) {
-    console.log(value);
-    setProductValues(value);
+    // console.log(value);
+    definirValeursProduit(value);
+    // Ajouter au panier (evenement click bouton "Ajouter au panier")
+    boutonAjouter.addEventListener('click', function(event) {
+      panier.setItem(panier.length, JSON.stringify(value));
+      // console.log("event fired");
+    });
   })
   .catch(function(err) {
     // Une erreur est survenue
