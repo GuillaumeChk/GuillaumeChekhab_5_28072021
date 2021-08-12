@@ -130,27 +130,35 @@
                         </div> -->
             
                         <div class="mb-3">
-                          <label for="email">Courriel <span class="text-muted">(Facultatif)</span></label>
-                          <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                          <label for="email">Courriel</label>
+                          <input type="email" class="form-control" id="email" placeholder="exemple@exemple.com" required="">
                           <div class="invalid-feedback">
                             Veuillez entrer un courriel valide.
                           </div>
                         </div>
             
                         <div class="mb-3">
-                          <label for="address">Addresse</label>
-                          <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                          <label for="address">Adresse</label>
+                          <input type="text" class="form-control" id="address" placeholder="123 rue de la Paix" required="">
                           <div class="invalid-feedback">
                             Veuillez indiquer votre adresse d'expédition.
                           </div>
                         </div>
-            
+
                         <div class="mb-3">
-                          <label for="address2">Addresse 2 <span class="text-muted">(Facultatif)</span></label>
-                          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                          <label for="city">Ville</label>
+                          <input type="text" class="form-control" id="city" placeholder="Lyon" required="">
+                          <div class="invalid-feedback">
+                            Veuillez indiquer votre ville d'expédition.
+                          </div>
                         </div>
             
-                        <div class="row">
+                        <!-- <div class="mb-3">
+                          <label for="address2">Addresse 2 <span class="text-muted">(Facultatif)</span></label>
+                          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                        </div> -->
+            
+                        <!-- <div class="row">
                           <div class="col-md-8 mb-3">
                             <label for="country">Pays</label>
                             <select class="custom-select d-block w-100" id="country" required="">
@@ -168,7 +176,7 @@
                               Code postal requis.
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                         <hr class="mb-4">
                         <!-- <div class="custom-control custom-checkbox">
                           <input type="checkbox" class="custom-control-input" id="same-address">

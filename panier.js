@@ -75,14 +75,14 @@ function retirerDuPanier(id) {
   else {
     let trouve = false;
     Object.keys(panier).forEach(key => {
-      if(!trouve) {
+      if(!trouve) { // remplace break boucle for
         eltPanier = JSON.parse(panier.getItem(key));
         console.log(eltPanier + " " + eltPanier._id);
         if (id == eltPanier._id) {
           panier.removeItem(key);
-          console.log(panier);
-          console.log("Retiré no " + eltPanier._id);
-          console.log(panier);
+          // console.log(panier);
+          // console.log("Retiré no " + eltPanier._id);
+          // console.log(panier);
           trouve = true;
         }
       }
@@ -136,8 +136,49 @@ function ajouterToutHtml (panier) {
   document.getElementById("total").textContent = totalPrix + " €";
 }
 
+// Au chargement de la page :
 ajouterToutHtml(panier);
 console.log(panier);
+
+
+
+// Créer object contact
+function creerContact() {
+  const contact = {
+    firstName: document.getElementById("firstName").value,
+    lastName: document.getElementById("lastName").value,
+    address: document.getElementById("address").value,
+    city: document.getElementById("firstName").value,
+    email: document.getElementById("email").value
+  }
+  return contact;
+}
+
+// Envoi de la commande
+function send(e) {
+  fetch("http://localhost:3000/api/cameras/order", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json', 
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({value: creerContact()})
+  })
+  .then(function(res) {
+    if (res.ok) {
+      console.log("res ok");
+      return res.json();
+    }
+  })
+  // .then(function(value) {
+  //     document
+  //       .getElementById("result")
+  //       .innerText = value.postData.text;
+  // });
+}
+
+// EVENT envoyer commande
+document.getElementById("form").addEventListener("submit", send);
 
 // // Si paramètre (id du produit) dans l'url non vide
 // if(param.id != undefined) {
