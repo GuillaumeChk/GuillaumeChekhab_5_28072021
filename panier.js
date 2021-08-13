@@ -140,41 +140,51 @@ function ajouterToutHtml (panier) {
 ajouterToutHtml(panier);
 console.log(panier);
 
-
-
 // Créer object contact
 function creerContact() {
   const contact = {
     firstName: document.getElementById("firstName").value,
     lastName: document.getElementById("lastName").value,
     address: document.getElementById("address").value,
-    city: document.getElementById("firstName").value,
+    city: document.getElementById("city").value,
     email: document.getElementById("email").value
   }
+  console.log(contact);
   return contact;
+}
+
+// Créer tableau products (à partir du panier localstorage)
+function creerProducts() {
+  const products = [];
+  Object.keys(panier).forEach(key => {
+    eltPanier = JSON.parse(panier.getItem(key));
+    products.push(eltPanier._id);
+  });
+  console.log(products);
+  return products;
 }
 
 // Envoi de la commande
 function send(e) {
+  e.preventDefault();
   fetch("http://localhost:3000/api/cameras/order", {
     method: "POST",
     headers: {
       'Accept': 'application/json', 
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({value: creerContact()})
+    body: JSON.stringify({contact: creerContact(), products: creerProducts()}) // ,{products: creerProducts()}
   })
   .then(function(res) {
+    console.log(res);
     if (res.ok) {
-      console.log("res ok");
+      // console.log("res ok");
       return res.json();
     }
   })
-  // .then(function(value) {
-  //     document
-  //       .getElementById("result")
-  //       .innerText = value.postData.text;
-  // });
+  .then(function(value) {
+    console.log(value.orderId);
+  })
 }
 
 // EVENT envoyer commande
