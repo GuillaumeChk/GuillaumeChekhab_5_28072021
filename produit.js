@@ -15,11 +15,11 @@ function definirValeursProduit (objet) {
     
     // Ajouter les options du select
     for (const i in objet.lenses) {
-        if (Object.hasOwnProperty.call(objet.lenses, i)) {
-            const selectLine = document.createElement("option");
-            selectLine.textContent = objet.lenses.at(i); // attribut "lenses" de l'objet
-            document.getElementById("choixSelect").appendChild(selectLine);
-        }
+      if (Object.hasOwnProperty.call(objet.lenses, i)) {
+          const selectLine = document.createElement("option");
+          selectLine.textContent = objet.lenses.at(i); // attribut "lenses" de l'objet
+          document.getElementById("choixSelect").appendChild(selectLine);
+      }
     }
 
     // Ajouter lien au bouton "Ajouter au panier"

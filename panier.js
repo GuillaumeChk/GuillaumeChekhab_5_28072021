@@ -138,7 +138,7 @@ function ajouterToutHtml (panier) {
 
 // Au chargement de la page :
 ajouterToutHtml(panier);
-console.log(panier);
+// console.log(panier);
 
 // Créer object contact
 function creerContact() {
@@ -173,17 +173,19 @@ function send(e) {
       'Accept': 'application/json', 
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({contact: creerContact(), products: creerProducts()}) // ,{products: creerProducts()}
+    body: JSON.stringify({contact: creerContact(), products: creerProducts()})
   })
   .then(function(res) {
-    console.log(res);
+    // console.log(res);
     if (res.ok) {
-      // console.log("res ok");
       return res.json();
     }
   })
   .then(function(value) {
     console.log(value.orderId);
+    document.getElementById("form").action = "commande.html?order=" + value.orderId;
+    console.log(document.getElementById("form").action);
+    document.getElementById("form").submit();
   })
 }
 
