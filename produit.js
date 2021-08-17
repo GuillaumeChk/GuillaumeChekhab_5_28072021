@@ -16,9 +16,9 @@ function definirValeursProduit (objet) {
     // Ajouter les options du select
     for (const i in objet.lenses) {
       if (Object.hasOwnProperty.call(objet.lenses, i)) {
-          const selectLine = document.createElement("option");
-          selectLine.textContent = objet.lenses.at(i); // attribut "lenses" de l'objet
-          document.getElementById("choixSelect").appendChild(selectLine);
+        const selectLine = document.createElement("option");
+        selectLine.textContent = objet.lenses.at(i); // attribut "lenses" de l'objet
+        document.getElementById("choixSelect").appendChild(selectLine);
       }
     }
 
@@ -29,7 +29,6 @@ function definirValeursProduit (objet) {
 
 // Panier localstorage
 panier = localStorage;
-// panier.clear();
 boutonAjouter = document.getElementById("goPanier");
 
 // Récupérer les valeurs du produit
@@ -40,17 +39,13 @@ fetch(urlProduit)
     }
   })
   .then(function(value) {
-    // console.log(value);
     definirValeursProduit(value);
     // Ajouter au panier (evenement click bouton "Ajouter au panier")
     boutonAjouter.addEventListener('click', function(event) {
       panier.setItem(panier.length, JSON.stringify(value));
-      // console.log("event fired");
     });
   })
   .catch(function(err) {
     // Une erreur est survenue
     console.log("Catch erreur dans le fetch : " + err);
   });
-
-//console.log(urlProduit);

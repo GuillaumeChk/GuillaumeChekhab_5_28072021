@@ -83,5 +83,3 @@ fetch("http://localhost:3000/api/cameras/")
     // Une erreur est survenue
     console.log("Catch erreur dans le fetch");
   });
-
-//console.log(listeProduits);

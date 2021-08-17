@@ -1,19 +1,8 @@
-// // Récupérer les parametres de l'url http...?id=...
-// const urlSearchParams = new URLSearchParams(window.location.search);
-// const param = Object.fromEntries(urlSearchParams.entries());
-
-// console.log(param.id != undefined);
-
-// const urlProduit = "http://localhost:3000/api/cameras/" + param.id;
-
 // Panier localstorage
 panier = localStorage;
-// panier.clear();
 
 // Total panier
 let totalPrix = 0;
-
-// console.log(panier);
 
 // Ajouter le produit au panier HTML
 function ajouterAuPanierHtml (objet, multiple) {
@@ -80,9 +69,6 @@ function retirerDuPanier(id) {
         console.log(eltPanier + " " + eltPanier._id);
         if (id == eltPanier._id) {
           panier.removeItem(key);
-          // console.log(panier);
-          // console.log("Retiré no " + eltPanier._id);
-          // console.log(panier);
           trouve = true;
         }
       }
@@ -99,9 +85,7 @@ function compterMultiples(elt) {
     if (elt._id == eltPanier._id) {
       multiple++;
     }
-    // console.log(elt._id + " " + eltPanier._id);
   }
-  // console.log("multiples = " + multiple);
   return multiple;
 }
 
@@ -122,13 +106,11 @@ function ajouterToutHtml (panier) {
   let panierTemp = []; // panier des éléments à comparer pour vérifier si déjà ajouté
   for (let i = 0; i < panier.length; i++) {
     let elt = JSON.parse(panier.getItem(panier.key(i)));
-    // console.log(elt._id);
     totalPrix += elt.price;
     
     // Si pas déjà fait, alors ajouterAuPanierHtml
     if (!verifierDejaFait(elt, panierTemp)) {
       panierTemp.push(elt);
-      // console.log("pushed");
       ajouterAuPanierHtml(elt, compterMultiples(elt));  
     }
   }
@@ -138,7 +120,6 @@ function ajouterToutHtml (panier) {
 
 // Au chargement de la page :
 ajouterToutHtml(panier);
-// console.log(panier);
 
 // Créer object contact
 function creerContact() {
@@ -166,7 +147,6 @@ function creerProducts() {
 
 // Envoi de la commande
 function send(e) {
-  e.preventDefault();
   fetch("http://localhost:3000/api/cameras/order", {
     method: "POST",
     headers: {
@@ -176,44 +156,15 @@ function send(e) {
     body: JSON.stringify({contact: creerContact(), products: creerProducts()})
   })
   .then(function(res) {
-    // console.log(res);
     if (res.ok) {
       return res.json();
     }
   })
   .then(function(value) {
     console.log(value.orderId);
-    document.getElementById("form").action = "commande.html?order=" + value.orderId;
-    console.log(document.getElementById("form").action);
-    document.getElementById("form").submit();
+    window.open("commande.html?order=" + value.orderId, '_self');
   })
 }
 
 // EVENT envoyer commande
-document.getElementById("form").addEventListener("submit", send);
-
-// // Si paramètre (id du produit) dans l'url non vide
-// if(param.id != undefined) {
-//   // Récupérer les valeurs du produit
-//   fetch(urlProduit)
-//   .then(function(res) {
-//     if (res.ok) {
-//       return res.json();
-//     }
-//   })
-//   .then(function(value) {
-//     //console.log(value);
-//     // panier.setItem(panier.length, JSON.stringify(value));
-//     ajouterToutHtml(panier);
-//     console.log(panier);
-//   })
-//   .catch(function(err) {
-//     // Une erreur est survenue
-//     console.log("Catch erreur dans le fetch : " + err);
-//   });
-// }
-// else {
-//   console.log("pas de nouveau produit");
-//   ajouterToutHtml(panier);
-//   console.log(panier);
-// }
+document.getElementById("link").addEventListener("click", send);
