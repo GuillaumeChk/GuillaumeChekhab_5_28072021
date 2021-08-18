@@ -130,7 +130,6 @@ function creerContact() {
     city: document.getElementById("city").value,
     email: document.getElementById("email").value
   }
-  console.log(contact);
   return contact;
 }
 
@@ -141,7 +140,6 @@ function creerProducts() {
     eltPanier = JSON.parse(panier.getItem(key));
     products.push(eltPanier._id);
   });
-  console.log(products);
   return products;
 }
 
@@ -161,10 +159,30 @@ function send(e) {
     }
   })
   .then(function(value) {
-    console.log(value.orderId);
     window.open("commande.html?order=" + value.orderId, '_self');
   })
 }
 
 // EVENT envoyer commande
 document.getElementById("link").addEventListener("click", send);
+
+// (Bootstrap) Désactiver l'envoi si champs incorrects 
+(function() {
+  'use strict';
+
+  window.addEventListener('load', function() {
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.getElementsByClassName('needs-validation');
+
+  // Loop over them and prevent submission
+  var validation = Array.prototype.filter.call(forms, function(form) {
+    form.addEventListener('click', function(event) {
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+  }, false);
+})();
